@@ -1,0 +1,88 @@
+***CREATE A VPN TUNNEL TO ACCESS FROM ANYWHERE TO YOUR NAS***
+
+-install PIVPN:
+
+		curl -L https://installpivpn.io | bash
+
+
+-----> OK
+-----> user: pi
+-----> openVPN
+-----> protocol: UDP
+-----> port: 1194
+-----> DNS: cloudfire
+-----> custom search domain: NO
+-----> use a public domain
+-----> if your home network has a staic IP insert it, else create an account with NO-IP
+
+				https://www.noip.com/
+				register in it
+				choose, create, enable an host name
+				 
+
+-----> insert your hostname
+-----> elliptic curves:yes
+-----> encription: 384
+-----> upgrade: yes
+
+
+		sudo reboot
+
+-now go to your router website (usually is 192.168.1.1) and login
+
+-search on the page DynsDNS and insert no-ip credentials
+		
+		provider: no-ip.com
+		domain: YOUR_CUSTOM_DOMAIN.XXXX
+		user: _youruser_name
+		passoword: ...
+
+-search into your router page raspberry pi's name and choose the option for assigning it alwas the same ip address (maybe is under mesh network sets)
+
+-now goto port forwarding and create a new abilitation:
+
+		->other app
+		->name:vpn
+		->protocol: UDP
+		->port: 1194
+		->access via IPV4
+		->save and enable
+
+-return on putty and create a certificate:
+
+		pivpn -a
+
+		->type a name for it
+		->deadline: 3695    (are days)
+		->type a password for your new certificate
+
+-on windows search explorer digit 
+			
+		\\192.168.1...(ip nas)
+
+-enter to folder 
+	
+		open vpn --> ovpn
+		
+-copy and paste the cerificate to your desktop:
+
+		name_cert.ovpn
+
+-----install on windows/android/IOS:
+		
+		OPENVPN app   and import the certifiacte.
+
+NOW CONNECT TO YOUR VPN TUNNEL AND YOU ARE ABLE TO ACCESS TO YOUR NAS FROM EVERYWHERE !!!!!!!!!
+
+
+::::::::::::::::::::::::::::::::::END:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+
+		
+
+
+	
+
+	
+

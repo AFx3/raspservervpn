@@ -1,0 +1,151 @@
+**YOU NEED ABOUT**
+
+-raspberry pi
+-raspian os installed (or other)
+-putty on a client 
+-ssh enable on raspberrypi
+-(raspberrypi) ip address
+-an empty hdd/ssd
+
+
+**STEP ONE**
+-connect to your pi 
+	(open putty, write raspberry pi's ip, and login to)
+
+
+-insert your hdd/ssd via usb:
+
+
+-find your disk name:
+	
+	(terminal: 	sudo fdisk -l	) (example results: ...Disk .../dev/sda)
+
+-format disk in the correcr one(ext4) (WILL ERASE ALL CONTENT)
+	
+	(terminal:	sudo mkfs.ext4  /dev/sda -L     rename_your_disk  )
+			                 (previous name)
+
+-create a directory to put the disk in:
+
+	(terminal: 	sudo mkdir /media/nas
+
+
+-give it read/write/execution permissions:
+	
+	(terminal: 	sudo chown -R pi:pi  /media/nas
+				      (user)
+
+	 terminal: 	sudo chown 770 /media/nas   )
+
+
+-mount the disk:
+
+	(terminal: 	sudo mount dev/sda /media/nas   )
+
+
+-verify actions taken are right
+
+	(terminal: 	cd /media/nas
+	 terminal:	ls
+
+	.......operations show you folder's disk.....  )
+
+
+-save all:
+
+	(terminal: sudo nano /etc/fstab  
+
+	(move inside using arrows), and press enter to write a new line at the end and type in:
+		
+		/dev/sda /media/nas ext4 defauls 0 0   (space are made with TAB button)
+
+	(save)
+		CTRL + o
+		press enter
+	(exit)
+		CTRL + x     )
+
+
+-update packages:
+	
+	(terminal: 	sudo apt-get update   )
+
+
+
+
+-install Samba db (henceforth it is understood to type from terminal):
+
+			sudo apt-get install samba samba-common-bin
+
+
+
+-conf Samba DB:
+
+			sudo nano samba.conf
+
+
+-type in (move on with cross and type space with tab button):
+
+	
+	[usb]
+	comment = MyHomeServerNas
+	path = /media/nas
+	writable = yes
+
+------save and exit:    ctrl+o      ctrl+x-------
+
+
+
+-restart Samba
+
+		sudo service smbd restart
+
+
+
+-create a password to login into samba (user pi)
+
+		sudo new_passord -a pi
+		(type it two times)
+
+
+-restart Samba
+
+		sudo service smbd restart
+
+
+-set permissions to access to hdd/ssd directory
+
+		sudo chmod -R 777 media nas
+
+
+
+----if you want to show all directories type this----
+		sudo chown -R pi:pi /media/nas
+
+
+-go to your win client and type from search nav (explore resources)
+
+		\\192.168.1.....(ip pi)
+		
+		and insert your credentials!
+
+********NOW YOU ARE ABLE TO ACCESS TO YOUR NAS INSIDE YOUR HOME/WORK NETWORK******
+
+------you can install apps for android/ios to access to your NAS (like smart file manager or else)
+------add rasperry pi ip_address, user (pi) and samba password in the right area of app to show your NAS) 
+
+
+***END***
+		
+  
+
+
+	
+
+		
+	
+
+	
+
+	
+
