@@ -76,12 +76,19 @@
 -install Samba db (henceforth it is understood to type from terminal):
 
 			sudo apt-get install samba samba-common-bin
+			
+			
+			-->answear: NO (...win... ecc..)
 
 
 
--conf Samba DB:
+-conf Samba DB and do a copy of samba's configuration document :
+			
+			cd /etc/samba
+			
+			sudo cp smb.conf smb.conf.orig
 
-			sudo nano samba.conf
+			sudo nano smb.conf
 
 
 -type in (move on with cross and type space with tab button):
@@ -104,7 +111,7 @@
 
 -create a password to login into samba (user pi)
 
-		sudo new_passord -a pi
+		sudo smbpasswd -a pi
 		(type it two times)
 
 
@@ -115,7 +122,7 @@
 
 -set permissions to access to hdd/ssd directory
 
-		sudo chmod -R 777 media nas
+		sudo chmod -R 777 /media nas
 
 
 
@@ -127,7 +134,7 @@
 
 		\\192.168.1.....(ip pi)
 		
-		and insert your credentials!
+		and type in your username and password!
 
 ********NOW YOU ARE ABLE TO ACCESS TO YOUR NAS INSIDE YOUR HOME/WORK NETWORK******
 
